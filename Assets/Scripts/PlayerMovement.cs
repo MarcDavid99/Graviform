@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+        horizontalMove = controller.direction * speed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
             jump = true;
             animator.SetBool("IsJumping", true);
         }
+
+       
+       
+
     }
 
     public void OnLanding()

@@ -19,6 +19,14 @@ public class PlayerController2D : MonoBehaviour
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
 
+
+    private bool isRotating = false;
+    private float rotation;
+
+    public float direction = 0;
+    
+
+
     [Header("Events")]
     [Space]
 
@@ -30,9 +38,14 @@ public class PlayerController2D : MonoBehaviour
     public BoolEvent OnCrouchEvent;
     private bool m_wasCrouching = false;
 
+    private float upDirection;
+    private string whatsUp;
+
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+
+        
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -43,6 +56,73 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Done rotating
+        if (isRotating || Camera.main.transform.rotation.eulerAngles.z % 90 == 0)
+        {
+            isRotating = false;
+            
+            rotation = Camera.main.transform.rotation.eulerAngles.z;
+
+            if (rotation == 0)
+            {
+                direction = Input.GetAxisRaw("Horizontal");
+                upDirection = 1;
+                whatsUp = "x";
+                
+
+                transform.eulerAngles = new Vector3(0, 0, 0);
+
+
+                Physics2D.gravity = new Vector2(0, -9.81f);
+            }
+            if (rotation == 90)
+            {
+                direction = Input.GetAxisRaw("Vertical");
+                upDirection = -1;
+                whatsUp = "y";
+                
+                transform.eulerAngles = new Vector3(0, 0, 90);
+                Physics2D.gravity = new Vector2(9.81f, 0);
+
+                Debug.Log(Physics2D.gravity);
+            }
+
+            if (rotation == 180)
+            {
+                direction = - Input.GetAxisRaw("Horizontal");
+                upDirection = -1;
+                whatsUp = "x";
+                
+                transform.eulerAngles = new Vector3(0, 0, 180);
+                Physics2D.gravity = new Vector2(0, 9.81f);
+            }
+
+            if (rotation == 270)
+            {
+                direction = -Input.GetAxisRaw("Vertical");
+                
+                upDirection = 1;
+                whatsUp = "y";
+                transform.eulerAngles = new Vector3(0, 0, 270);
+                Physics2D.gravity = new Vector2(-9.81f, 0);
+
+            }
+        }
+        //Kui ekraani rotatetakse, siis tehakse midagi
+        if(Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.N))
+        {
+            isRotating = true;
+
+            Debug.Log("Should be true: " + isRotating);
+            
+
+
+        }
+        
+
+        
+
+
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
@@ -59,7 +139,7 @@ public class PlayerController2D : MonoBehaviour
             }
         }
     }
-
+    
 
     public void Move(float move, bool crouch, bool jump)
     {
@@ -129,8 +209,15 @@ public class PlayerController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            if (whatsUp.Equals("x")) {
+                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * upDirection));
+            }
+            else
+            {
+                m_Rigidbody2D.AddForce(new Vector2(m_JumpForce * upDirection,0f));
+            }
         }
+       
     }
 
 
