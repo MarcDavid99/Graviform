@@ -16,14 +16,15 @@ public class PlayerController2D : MonoBehaviour
     private bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
+    private PlayerRotate m_PlayerRotate;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
-
+    private int moveDir;
+    private int axisDir;
 
     private bool isRotating = false;
     private float rotation;
-
-    public float direction = 0;
+    
     
 
 
@@ -44,7 +45,7 @@ public class PlayerController2D : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-
+        m_PlayerRotate = GetComponent<PlayerRotate>();
         
 
         if (OnLandEvent == null)
@@ -56,75 +57,11 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Done rotating
-        if (isRotating || Camera.main.transform.rotation.eulerAngles.z % 90 == 0)
-        {
-            isRotating = false;
-            
-            rotation = Camera.main.transform.rotation.eulerAngles.z;
-
-            if (rotation == 0)
-            {
-                direction = Input.GetAxisRaw("Horizontal");
-                upDirection = 1;
-                whatsUp = "x";
-                
-
-                transform.eulerAngles = new Vector3(0, 0, 0);
-
-
-                Physics2D.gravity = new Vector2(0, -9.81f);
-            }
-            if (rotation == 90)
-            {
-                direction = Input.GetAxisRaw("Vertical");
-                upDirection = -1;
-                whatsUp = "y";
-                
-                transform.eulerAngles = new Vector3(0, 0, 90);
-                Physics2D.gravity = new Vector2(9.81f, 0);
-
-                Debug.Log(Physics2D.gravity);
-            }
-
-            if (rotation == 180)
-            {
-                direction = - Input.GetAxisRaw("Horizontal");
-                upDirection = -1;
-                whatsUp = "x";
-                
-                transform.eulerAngles = new Vector3(0, 0, 180);
-                Physics2D.gravity = new Vector2(0, 9.81f);
-            }
-
-            if (rotation == 270)
-            {
-                direction = -Input.GetAxisRaw("Vertical");
-                
-                upDirection = 1;
-                whatsUp = "y";
-                transform.eulerAngles = new Vector3(0, 0, 270);
-                Physics2D.gravity = new Vector2(-9.81f, 0);
-
-            }
-        }
-        //Kui ekraani rotatetakse, siis tehakse midagi
-        if(Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.N))
-        {
-            isRotating = true;
-
-            Debug.Log("Should be true: " + isRotating);
-            
-
-
-        }
         
-
-        
-
-
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
+
+        
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
@@ -143,6 +80,10 @@ public class PlayerController2D : MonoBehaviour
 
     public void Move(float move, bool crouch, bool jump)
     {
+        axisDir = m_PlayerRotate.axisDirection;
+
+        moveDir = m_PlayerRotate.moveDirection;
+
         // If crouching, check to see if the character can stand up
         if (!crouch)
         {
@@ -186,10 +127,21 @@ public class PlayerController2D : MonoBehaviour
                 }
             }
 
+
+            Debug.Log(moveDir);
+            if (axisDir == 0) { 
+
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
-            // And then smoothing it out and applying it to the character
-            m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+                Vector3 targetVelocity = new Vector2(moveDir * move * 10f, m_Rigidbody2D.velocity.y);
+                m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            }
+             else
+            {
+                Vector3 targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveDir * move * 10f );
+                m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+            }
+            //And then smoothing it out and applying it to the character
+            
 
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight)
@@ -209,13 +161,18 @@ public class PlayerController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            if (whatsUp.Equals("x")) {
-                m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * upDirection));
+
+            if (axisDir == 0)
+            {
+                m_Rigidbody2D.AddForce(new Vector2(0f, moveDir * m_JumpForce));
             }
             else
             {
-                m_Rigidbody2D.AddForce(new Vector2(m_JumpForce * upDirection,0f));
+                m_Rigidbody2D.AddForce(new Vector2(-moveDir * m_JumpForce, 0f));
             }
+
+            
+           
         }
        
     }

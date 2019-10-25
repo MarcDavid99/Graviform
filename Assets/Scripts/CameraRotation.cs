@@ -6,48 +6,55 @@ using Cinemachine;
 public class CameraRotation : MonoBehaviour
 {
 
-    public List<CinemachineVirtualCamera> PlayerCameras;
+    //public List<CinemachineVirtualCamera> PlayerCameras;
     private int current;
-    
+    private float x;
+    private float y;
+    private Vector3 rotateValue;
+    private bool isPressed;
+    private int rotateDir;
 
+    public float speed = 2f;
     // Start is called before the first frame update
     void Start()
     {
         current = 0;
+        isPressed = false;
+        //PlayerCameras[current].MoveToTopOfPrioritySubqueue();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+
+        if (isPressed)
         {
-            if(current == PlayerCameras.Count-1)
+            
+            transform.Rotate(0, 0, speed * rotateDir);
+
+
+            current += 1;
+
+            if (current == 90/speed) 
             {
+                isPressed = false;
+               
                 current = 0;
             }
-            else
-            {
-                current++;
-            }
 
+        }
 
-            PlayerCameras[current].MoveToTopOfPrioritySubqueue();
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            isPressed = true;
+            rotateDir = 1;
             
         }
 
-        if (Input.GetKeyDown(KeyCode.N))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (current == 0)
-            {
-                current = PlayerCameras.Count - 1;
-            }
-            else
-            {
-                current--;
-            }
-
-            PlayerCameras[current].MoveToTopOfPrioritySubqueue();
-            
+            isPressed = true;
+            rotateDir = -1;
         }
 
 

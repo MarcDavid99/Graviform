@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 2796359145819374812}
   - component: {fileID: 2796359145819374819}
   - component: {fileID: 2796359145819374818}
+  - component: {fileID: 8089194976608614549}
   - component: {fileID: 2796359145819374815}
   - component: {fileID: 2796359145819374817}
   - component: {fileID: 2796359145819374814}
@@ -191,6 +192,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: PlayerController2D+BoolEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &8089194976608614549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2796359145819374816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dade70d66bdcdf048b9d3d5144100296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2796359145819374815
 MonoBehaviour:
   m_ObjectHideFlags: 0

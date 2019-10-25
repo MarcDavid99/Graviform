@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horizontalMove = controller.direction * speed;
+        horizontalMove = Input.GetAxis("Horizontal") * speed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
