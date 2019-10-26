@@ -7,7 +7,7 @@ public class CameraRotation : MonoBehaviour
 {
 
     //public List<CinemachineVirtualCamera> PlayerCameras;
-    private int current;
+    private float current;
     private float x;
     private float y;
     private Vector3 rotateValue;
@@ -16,6 +16,11 @@ public class CameraRotation : MonoBehaviour
 
     public float speed = 2f;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        Events.OnChangeCamera += RotateCamera;
+    }
     void Start()
     {
         current = 0;
@@ -26,40 +31,39 @@ public class CameraRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (current != 0)
+        {
+            Debug.Log(current);
+        }
 
         if (isPressed)
         {
-            
+
             transform.Rotate(0, 0, speed * rotateDir);
 
 
-            current += 1;
+            current += rotateDir;
 
-            if (current == 90/speed) 
+            if (current == 90 / speed && rotateDir == 1 || current == -90 / speed && rotateDir == -1)
             {
                 isPressed = false;
-               
+
                 current = 0;
             }
 
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            isPressed = true;
-            rotateDir = 1;
-            
-        }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            isPressed = true;
-            rotateDir = -1;
-        }
-
-
-
     }
 
-    
+    void RotateCamera(int dir)
+    {
+        if (isPressed && dir == rotateDir)
+        {
+            current -= 90 / speed * dir;
+        }
+        isPressed = true;
+        rotateDir = dir;
+    }
+
+
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerRotate : MonoBehaviour
+public class PlayerRotation : MonoBehaviour
 {
 
     private bool isPressed = false;
@@ -10,10 +10,18 @@ public class PlayerRotate : MonoBehaviour
     Vector2 gravity;
     private int counter= 0;
     private Rigidbody2D rb;
+    private int direction = 0;
+    private string[] directions = { "down", "left", "up", "right" };
 
     //If axisDirection = 0, then when moving change x coordinates, otherwise y coordinates (if flipped to the side)s
     public int axisDirection = 0;
     public int moveDirection;
+
+    private void Awake()
+    {
+        Events.OnChangeGravity += handleRotation;
+        Events.OnRequestGravityDirection += getCurrentDirection;
+    }
 
     private void Start()
     {
@@ -25,23 +33,13 @@ public class PlayerRotate : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            isPressed = true;
-            keyPressed = "E";
-
+            Events.ChangeGravity(1);
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            isPressed = true;
-            keyPressed = "Q";
+            Events.ChangeGravity(-1);
         }
-
-        if (isPressed)
-        {
-            handleRotation();
-        }
-
-
     }
 
     void handleGravity(float rotation)
@@ -73,26 +71,41 @@ public class PlayerRotate : MonoBehaviour
         }
     }
 
-    void handleRotation()
+    void handleRotation(int direction)
     {
-        if (keyPressed.Equals("Q"))
+        if (direction == -1)
         {
+            this.direction += direction;
+            if (this.direction == -1)
+            {
+                this.direction = 3;
+            }
             Debug.Log("handleRotation method, entered Q");
             transform.Rotate(0, 0, -90);
-            isPressed = false;
+          
 
             handleGravity(transform.rotation.ToEuler().z);
 
         }
 
-        if (keyPressed.Equals("E"))
+        if (direction == 1)
         {
+            this.direction += direction;
+            if (this.direction == 4)
+            {
+                this.direction = 0;
+            }
             Debug.Log("handleRotation method, entered E");
             transform.Rotate(0, 0, 90);
-            isPressed = false;
-
             handleGravity(transform.rotation.ToEuler().z);
         }
+
+        Events.ChangeCamera(direction);
+    }
+
+   string getCurrentDirection()
+    {
+        return directions[direction];
     }
 
 }
