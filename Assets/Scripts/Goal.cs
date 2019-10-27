@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class Trap : MonoBehaviour
+public class Goal : MonoBehaviour
 {
-    public GameObject Spawn;
+    private GameObject Spawn;
     public Text score;
-    private int score_count = 0;
+    private int score_count;
 
-    // Start is called before the first frame update
     void Start()
     {
         Spawn = GameObject.FindWithTag("Respawn");
@@ -18,22 +16,13 @@ public class Trap : MonoBehaviour
 
     public void update_score()
     {
-        if(score.text == "Deaths: 0")
-        {
-            score_count = 0;
-        }
-        score_count += 1;
+        score_count = 0;
         score.text = "Deaths: " + score_count;
-    }
-
-    public void update_time()
-    {
-        
     }
 
     void Update()
     {
-
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
