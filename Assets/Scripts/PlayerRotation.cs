@@ -31,14 +31,16 @@ public class PlayerRotation : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Events.ChangeGravity(1);
-        }
+        if (Time.timeScale > 0) {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Events.ChangeGravity(1);
+            }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            Events.ChangeGravity(-1);
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Events.ChangeGravity(-1);
+            }
         }
     }
 
