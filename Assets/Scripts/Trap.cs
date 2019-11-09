@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class Trap : MonoBehaviour
 {
-    public GameObject Spawn;
+    
     public Text score;
     private int score_count = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        Spawn = GameObject.FindWithTag("Respawn");
+        
     }
 
     public void update_score()
@@ -39,6 +39,5 @@ public class Trap : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         update_score();
-        collision.gameObject.transform.position = Spawn.transform.position;
     }
 }

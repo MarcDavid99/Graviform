@@ -11,9 +11,12 @@ public static class Events
     public static event Func<string> OnRequestGravityDirection;
     public static string RequestGravityDirection() => OnRequestGravityDirection?.Invoke() ?? "down";
 
-    public static event Action<int> OnChangeCamera;
-    public static void ChangeCamera(int direction) => OnChangeCamera?.Invoke(direction);
+    public static event Action<string> OnChangeCamera;
+    public static void ChangeCamera(string direction) => OnChangeCamera?.Invoke(direction);
 
     public static event Func<bool> OnRequestAllowRotation;
     public static bool RequestAllowRotation() => OnRequestAllowRotation?.Invoke() ?? true;
+
+    public static event Action OnSwitchCanMove;
+    public static void SwitchCanMove() => OnSwitchCanMove?.Invoke();
 }

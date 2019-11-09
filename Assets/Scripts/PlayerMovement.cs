@@ -7,18 +7,20 @@ public class PlayerMovement : MonoBehaviour
     public PlayerController2D controller;
     public float speed = 40f;
     public Animator animator;
-    
+
 
     private float horizontalMove = 0f;
     private bool jump = false;
+    private bool canMove = true;
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        if (Time.timeScale > 0) {
+        if (Time.timeScale > 0)
+        {
             horizontalMove = Input.GetAxis("Horizontal") * speed;
 
             animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
@@ -30,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-       
-       
+
+
 
     }
 
@@ -42,8 +44,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
+
     }
+
+
 
 }

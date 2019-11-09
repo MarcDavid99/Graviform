@@ -102,7 +102,7 @@ public class PlayerRotation : MonoBehaviour
             handleGravity(transform.rotation.ToEuler().z);
         }
 
-        Events.ChangeCamera(direction);
+        Events.ChangeCamera(Events.RequestGravityDirection());
     }
 
    string getCurrentDirection()

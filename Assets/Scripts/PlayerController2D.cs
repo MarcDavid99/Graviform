@@ -24,9 +24,9 @@ public class PlayerController2D : MonoBehaviour
 
     private bool isRotating = false;
     private float rotation;
-    
-    
 
+
+    private GameObject Spawn;
 
     [Header("Events")]
     [Space]
@@ -45,6 +45,8 @@ public class PlayerController2D : MonoBehaviour
 
     private void Awake()
     {
+        Spawn = GameObject.FindWithTag("Respawn");
+
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_PlayerRotate = GetComponent<PlayerRotation>();
         
@@ -192,18 +194,21 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        this.gameObject.transform.position = Spawn.transform.position;
         string orientation = Events.RequestGravityDirection();
         if (orientation.Equals("left"))
         {
             Events.ChangeGravity(-1);
-        } else if (orientation.Equals("right"))
+        }
+        else if (orientation.Equals("right"))
         {
             Events.ChangeGravity(1);
-        } else if (orientation.Equals("up"))
+        }
+        else if (orientation.Equals("up"))
         {
             Events.ChangeGravity(1);
             Events.ChangeGravity(1);
         }
-        m_Rigidbody2D.velocity = new Vector2(0, 0);
+
     }
 }

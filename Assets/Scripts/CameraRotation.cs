@@ -7,7 +7,8 @@ public class CameraRotation : MonoBehaviour
 {
 
     //public List<CinemachineVirtualCamera> PlayerCameras;
-    private float current;
+    private int current;
+    private Vector3 target;
     private float x;
     private float y;
     private Vector3 rotateValue;
@@ -31,38 +32,35 @@ public class CameraRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (current != 0)
-        {
-            Debug.Log(current);
-        }
 
         if (isPressed)
         {
 
-            transform.Rotate(0, 0, speed * rotateDir);
-
-
-            current += rotateDir;
-
-            if (current == 90 / speed && rotateDir == 1 || current == -90 / speed && rotateDir == -1)
-            {
-                isPressed = false;
-
-                current = 0;
-            }
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(target), speed * Time.deltaTime);
 
         }
 
     }
 
-    void RotateCamera(int dir)
+    void RotateCamera(string dir)
     {
-        if (isPressed && dir == rotateDir)
+        if (dir.Equals("down"))
         {
-            current -= 90 / speed * dir;
+            target = new Vector3(0, 0, 0);
+        }
+        else if (dir.Equals("up"))
+        {
+            target = new Vector3(0, 0, 180);
+        }
+        else if (dir.Equals("left"))
+        {
+            target = new Vector3(0, 0, 90);
+        }
+        else if (dir.Equals("right"))
+        {
+            target = new Vector3(0, 0, -90);
         }
         isPressed = true;
-        rotateDir = dir;
     }
 
 
