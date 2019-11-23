@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Trap
+  - Crate
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 2170587673
+    locked: 0
+  - name: Tilemap
+    uniqueID: 173316623
     locked: 0
   - name: Default
     uniqueID: 0

@@ -19,4 +19,8 @@ public static class Events
 
     public static event Action OnSwitchCanMove;
     public static void SwitchCanMove() => OnSwitchCanMove?.Invoke();
+
+    public static event Action OnRespawn;
+
+    public static void Respawn() => OnRespawn?.Invoke();
 }

@@ -13,7 +13,7 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
 
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the player is grounded.
+    public bool m_Grounded;            // Whether or not the player is grounded.
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
     private Rigidbody2D m_Rigidbody2D;
     private PlayerRotation m_PlayerRotate;
@@ -45,11 +45,14 @@ public class PlayerController2D : MonoBehaviour
 
     private void Awake()
     {
+
+        Events.OnRespawn += Respawn;
+
         Spawn = GameObject.FindWithTag("Respawn");
 
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         m_PlayerRotate = GetComponent<PlayerRotation>();
-        
+
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -60,11 +63,11 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
-        
+
 
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
@@ -79,7 +82,7 @@ public class PlayerController2D : MonoBehaviour
             }
         }
     }
-    
+
 
     public void Move(float move, bool crouch, bool jump)
     {
@@ -131,20 +134,21 @@ public class PlayerController2D : MonoBehaviour
             }
 
 
-            
-            if (axisDir == 0) { 
 
-            // Move the character by finding the target velocity
+            if (axisDir == 0)
+            {
+
+                // Move the character by finding the target velocity
                 Vector3 targetVelocity = new Vector2(moveDir * move * 10f, m_Rigidbody2D.velocity.y);
                 m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
             }
-             else
+            else
             {
-                Vector3 targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveDir * move * 10f );
+                Vector3 targetVelocity = new Vector2(m_Rigidbody2D.velocity.x, moveDir * move * 10f);
                 m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
             }
             //And then smoothing it out and applying it to the character
-            
+
 
             // If the input is moving the player right and the player is facing left...
             if (move > 0 && !m_FacingRight)
@@ -164,7 +168,6 @@ public class PlayerController2D : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-
             if (axisDir == 0)
             {
                 m_Rigidbody2D.AddForce(new Vector2(0f, moveDir * m_JumpForce));
@@ -174,10 +177,8 @@ public class PlayerController2D : MonoBehaviour
                 m_Rigidbody2D.AddForce(new Vector2(-moveDir * m_JumpForce, 0f));
             }
 
-            
-           
         }
-       
+
     }
 
 
@@ -192,7 +193,18 @@ public class PlayerController2D : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Trap"))
+        {
+            Debug.Log("Spawn");
+            Events.Respawn();
+        }
+    }
+
+    
+
+    private void Respawn()
     {
         this.gameObject.transform.position = Spawn.transform.position;
         string orientation = Events.RequestGravityDirection();
@@ -209,6 +221,5 @@ public class PlayerController2D : MonoBehaviour
             Events.ChangeGravity(1);
             Events.ChangeGravity(1);
         }
-
     }
 }

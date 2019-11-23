@@ -82,7 +82,6 @@ public class PlayerRotation : MonoBehaviour
             {
                 this.direction = 3;
             }
-            Debug.Log("handleRotation method, entered Q");
             transform.Rotate(0, 0, -90);
           
 
@@ -97,7 +96,6 @@ public class PlayerRotation : MonoBehaviour
             {
                 this.direction = 0;
             }
-            Debug.Log("handleRotation method, entered E");
             transform.Rotate(0, 0, 90);
             handleGravity(transform.rotation.ToEuler().z);
         }

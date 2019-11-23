@@ -35,9 +35,7 @@ public class CameraRotation : MonoBehaviour
 
         if (isPressed)
         {
-
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(target), speed * Time.deltaTime);
-
         }
 
     }
