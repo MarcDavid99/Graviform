@@ -4,35 +4,64 @@ using UnityEngine;
 
 public class Drone : MonoBehaviour
 {
+    public Bullet LaserPrefab;
+    public float LaserSpawnFrequency;
+
     public int Direction;
     public float MovingSpeed;
+
     private Rigidbody2D _rigidbody;
     private string _gravity;
+    private float _laserSpawnTime;
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _gravity = Events.RequestGravityDirection();
+        _laserSpawnTime = 0;
         SwitchAxis(_gravity);
         Move();
     }
 
-    
+
     void Update()
     {
+
+        if (Time.time > _laserSpawnTime)
+        {
+            _laserSpawnTime = Time.time + LaserSpawnFrequency;
+            Bullet laser1 = GameObject.Instantiate<Bullet>(LaserPrefab, null);
+            Bullet laser2 = GameObject.Instantiate<Bullet>(LaserPrefab, null);
+            laser1.transform.position = this.transform.position;
+            laser2.transform.position = this.transform.position;
+            
+            if (Direction == -1 || Direction == 1)
+            {
+                laser1.Direction = "left";
+                laser2.Direction = "right";
+
+            }
+            else
+            {
+                laser1.Direction = "up";
+                laser2.Direction = "down";
+            }
+        }
+
         // In the future gonna make it more dynamic.
         if (!Events.RequestGravityDirection().Equals(_gravity))
         {
             _gravity = Events.RequestGravityDirection();
             SwitchAxis(_gravity);
-        }     
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Switch: " + Direction);
-        Direction *= -1;
-        Debug.Log("After: " + Direction);
-        Move();
+        if (!collision.gameObject.tag.Equals("Bullet"))
+        {
+            Direction *= -1;
+            Move();
+        }
     }
 
     private void SwitchAxis(string gravity)

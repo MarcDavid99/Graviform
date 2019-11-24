@@ -202,8 +202,6 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    
-
     private void Respawn()
     {
         this.gameObject.transform.position = Spawn.transform.position;
