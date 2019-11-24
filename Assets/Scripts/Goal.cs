@@ -9,6 +9,7 @@ public class Goal : MonoBehaviour
     //public Text score;
     //private int score_count;
     public PauseMenu pauseMenu;
+    public AudioClipGroup WinSound;
 
     void Start()
     {
@@ -30,6 +31,7 @@ public class Goal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //update_score();
+        WinSound.Play();
         pauseMenu.hasWon = true;
         //collision.gameObject.transform.position = Spawn.transform.position;
     }

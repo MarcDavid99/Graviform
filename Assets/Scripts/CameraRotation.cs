@@ -17,6 +17,7 @@ public class CameraRotation : MonoBehaviour
 
     public float speed = 2f;
     // Start is called before the first frame update
+    public AudioClipGroup RotateSound;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class CameraRotation : MonoBehaviour
 
     void RotateCamera(string dir)
     {
+        
         if (dir.Equals("down"))
         {
             target = new Vector3(0, 0, 0);
@@ -58,6 +60,7 @@ public class CameraRotation : MonoBehaviour
         {
             target = new Vector3(0, 0, -90);
         }
+        RotateSound.Play();
         isPressed = true;
     }
 

@@ -21,6 +21,8 @@ public class PlayerController2D : MonoBehaviour
     private Vector3 m_Velocity = Vector3.zero;
     private int moveDir;
     private int axisDir;
+    public AudioClipGroup DeathSound;
+    public AudioClipGroup JumpSound;
 
     private bool isRotating = false;
     private float rotation;
@@ -177,6 +179,8 @@ public class PlayerController2D : MonoBehaviour
                 m_Rigidbody2D.AddForce(new Vector2(-moveDir * m_JumpForce, 0f));
             }
 
+            JumpSound.Play();
+
         }
 
     }
@@ -197,6 +201,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Trap"))
         {
+            DeathSound.Play();
             Debug.Log("Spawn");
             Events.Respawn();
         }
