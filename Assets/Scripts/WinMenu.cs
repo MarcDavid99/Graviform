@@ -7,8 +7,8 @@ public class WinMenu : MonoBehaviour
 {
     public void Restart()
     {
-        
-        SceneManager.LoadScene(1);
+        Events.Respawn();
+        // SceneManager.LoadScene(1);
     }
     public void QuitGame()
     {

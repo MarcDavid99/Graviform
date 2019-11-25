@@ -23,6 +23,7 @@ public class PlayerController2D : MonoBehaviour
     private int axisDir;
     public AudioClipGroup DeathSound;
     public AudioClipGroup JumpSound;
+    public AudioClipGroup SpawnSound;
 
     private bool isRotating = false;
     private float rotation;
@@ -209,6 +210,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void Respawn()
     {
+        SpawnSound.Play();
         this.gameObject.transform.position = Spawn.transform.position;
         string orientation = Events.RequestGravityDirection();
         if (orientation.Equals("left"))

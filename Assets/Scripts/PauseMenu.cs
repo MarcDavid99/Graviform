@@ -61,6 +61,9 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        hasWon = false;
+        winMenuUI.SetActive(false);
+        Events.Respawn();
+        //SceneManager.LoadScene(1);
     }
 }
