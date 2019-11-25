@@ -26,7 +26,7 @@ public class Drone : MonoBehaviour
     void Update()
     {
 
-        if (Time.time > _laserSpawnTime)
+        /*if (Time.time > _laserSpawnTime)
         {
             _laserSpawnTime = Time.time + LaserSpawnFrequency;
             Bullet laser1 = GameObject.Instantiate<Bullet>(LaserPrefab, null);
@@ -45,7 +45,7 @@ public class Drone : MonoBehaviour
                 laser1.Direction = "up";
                 laser2.Direction = "down";
             }
-        }
+        }*/
 
         // In the future gonna make it more dynamic.
         if (!Events.RequestGravityDirection().Equals(_gravity))
