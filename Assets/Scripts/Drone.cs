@@ -8,16 +8,20 @@ public class Drone : MonoBehaviour
     public float LaserSpawnFrequency;
 
     public int Direction;
-    public float MovingSpeed;
+    public float MovingSpeed = 0.1f;
 
+    private CircleCollider2D _collider;
     private Rigidbody2D _rigidbody;
     private string _gravity;
     private float _laserSpawnTime;
+    private float inverseMoveTime;
     void Start()
     {
+        _collider = GetComponent<CircleCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _gravity = Events.RequestGravityDirection();
         _laserSpawnTime = 0;
+        inverseMoveTime = 1f / MovingSpeed;
         SwitchAxis(_gravity);
         Move();
     }
@@ -50,6 +54,7 @@ public class Drone : MonoBehaviour
         // In the future gonna make it more dynamic.
         if (!Events.RequestGravityDirection().Equals(_gravity))
         {
+            _rigidbody.velocity = Vector3.zero;
             _gravity = Events.RequestGravityDirection();
             SwitchAxis(_gravity);
         }
@@ -59,6 +64,7 @@ public class Drone : MonoBehaviour
     {
         if (!collision.gameObject.tag.Equals("Bullet"))
         {
+            _rigidbody.velocity = Vector3.zero;
             Direction *= -1;
             Move();
         }
@@ -68,19 +74,45 @@ public class Drone : MonoBehaviour
     {
         if (gravity.Equals("up"))
         {
-            Direction = 1;
+            if (Direction == -2)
+            {
+                Direction = -1;
+            }
+            else
+            {
+                Direction = 1;
+            }
         }
         else if (gravity.Equals("down"))
         {
-            Direction = -1;
+            if (Direction == -2)
+            {
+                Direction = -1;
+            } else
+            {
+                Direction = 1;
+            }
         }
         else if (gravity.Equals("left"))
         {
-            Direction = -2;
+            if (Direction == -1)
+            {
+                Direction = -2;
+            } else
+            {
+                Direction = 1;
+            }
         }
         else
         {
-            Direction = 2;
+            if (Direction == -1)
+            {
+                Direction = -2;
+            }
+            else
+            {
+                Direction = 2;
+            }
         }
         Move();
     }
@@ -90,19 +122,15 @@ public class Drone : MonoBehaviour
         switch (Direction)
         {
             case -1:
-                _rigidbody.velocity = new Vector2(0, 0);
                 _rigidbody.velocity = new Vector2(-MovingSpeed, GetComponent<Rigidbody2D>().velocity.y);
                 break;
             case 1:
-                _rigidbody.velocity = new Vector2(0, 0);
                 _rigidbody.velocity = new Vector2(MovingSpeed, GetComponent<Rigidbody2D>().velocity.y);
                 break;
             case 2:
-                _rigidbody.velocity = new Vector2(0, 0);
                 _rigidbody.velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, MovingSpeed);
                 break;
             case -2:
-                _rigidbody.velocity = new Vector2(0, 0);
                 _rigidbody.velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, -MovingSpeed);
                 break;
         }

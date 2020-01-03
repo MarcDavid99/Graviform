@@ -23,6 +23,11 @@ public class CameraRotation : MonoBehaviour
     {
         Events.OnChangeCamera += RotateCamera;
     }
+
+    private void OnDestroy()
+    {
+        Events.OnChangeCamera -= RotateCamera;
+    }
     void Start()
     {
         current = 0;

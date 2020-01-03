@@ -12,6 +12,8 @@ public class PlayerRotation : MonoBehaviour
     private Rigidbody2D rb;
     private int direction = 0;
     private string[] directions = { "down", "left", "up", "right" };
+    private float RotateTime = 0;
+    private float _rotateTimeFrequency = 0.3f;
 
     //If axisDirection = 0, then when moving change x coordinates, otherwise y coordinates (if flipped to the side)s
     public int axisDirection = 0;
@@ -21,6 +23,13 @@ public class PlayerRotation : MonoBehaviour
     {
         Events.OnChangeGravity += handleRotation;
         Events.OnRequestGravityDirection += getCurrentDirection;
+        Physics2D.gravity = new Vector2(0, -9.8f);
+    }
+
+    private void OnDestroy()
+    {
+        Events.OnChangeGravity -= handleRotation;
+        Events.OnRequestGravityDirection -= getCurrentDirection;
     }
 
     private void Start()
@@ -31,14 +40,17 @@ public class PlayerRotation : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale > 0) {
+        if (Time.timeScale > 0 && RotateTime < Time.time) {
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
+                RotateTime = Time.time + _rotateTimeFrequency;
                 Events.ChangeGravity(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                RotateTime = Time.time + _rotateTimeFrequency;
                 Events.ChangeGravity(-1);
             }
         }
@@ -83,8 +95,6 @@ public class PlayerRotation : MonoBehaviour
                 this.direction = 3;
             }
             transform.Rotate(0, 0, -90);
-          
-
             handleGravity(transform.rotation.ToEuler().z);
 
         }

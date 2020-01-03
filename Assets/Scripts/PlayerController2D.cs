@@ -64,6 +64,11 @@ public class PlayerController2D : MonoBehaviour
             OnCrouchEvent = new BoolEvent();
     }
 
+    private void OnDestroy()
+    {
+        Events.OnRespawn -= Respawn;
+    }
+
     private void FixedUpdate()
     {
 
