@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
+    public Transform LeftCheck, RightCheck, MiddleCheck;
 
     private bool isPressed = false;
     private string keyPressed;
@@ -14,6 +15,7 @@ public class PlayerRotation : MonoBehaviour
     private string[] directions = { "down", "left", "up", "right" };
     private float RotateTime = 0;
     private float _rotateTimeFrequency = 0.3f;
+    private bool _collision;
 
     //If axisDirection = 0, then when moving change x coordinates, otherwise y coordinates (if flipped to the side)s
     public int axisDirection = 0;
@@ -41,17 +43,27 @@ public class PlayerRotation : MonoBehaviour
     void Update()
     {
         if (Time.timeScale > 0 && RotateTime < Time.time) {
-            
+
             if (Input.GetKeyDown(KeyCode.E))
             {
-                RotateTime = Time.time + _rotateTimeFrequency;
-                Events.ChangeGravity(1);
+                _collision = Physics2D.Linecast(MiddleCheck.position, LeftCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                if (!_collision)
+                {
+                    RotateTime = Time.time + _rotateTimeFrequency;
+                    Events.ChangeGravity(1);
+                    _collision = false;
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                RotateTime = Time.time + _rotateTimeFrequency;
-                Events.ChangeGravity(-1);
+                _collision = Physics2D.Linecast(MiddleCheck.position, RightCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                if (!_collision)
+                {
+                    RotateTime = Time.time + _rotateTimeFrequency;
+                    Events.ChangeGravity(-1);
+                    _collision = false;
+                }
             }
         }
     }
