@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     private float horizontalMove = 0f;
     private bool jump = false;
-    private bool canMove = true;
     void Start()
     {
 

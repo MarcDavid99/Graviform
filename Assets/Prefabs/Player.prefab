@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 2796359145819374816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.62, y: 0.53, z: 0}
-  m_LocalScale: {x: 0.2113352, y: 0.20775132, z: 0.25}
+  m_LocalScale: {x: 0.21133, y: 0.20775, z: 0.25}
   m_Children:
   - {fileID: 2796359144701356777}
   - {fileID: 2796359144858347248}
@@ -234,6 +234,9 @@ MonoBehaviour:
   m_CeilingCheck: {fileID: 2796359144858347248}
   m_CrouchDisableCollider: {fileID: 0}
   m_Grounded: 0
+  DeathSound: {fileID: 11400000, guid: 9132bab4980b75648930e5593cc12362, type: 2}
+  JumpSound: {fileID: 11400000, guid: 6c9c510321ccd58459fa7314eaf210bc, type: 2}
+  SpawnSound: {fileID: 11400000, guid: d54ac383d7e367b49aa77c551bcb3202, type: 2}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -296,7 +299,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.60175216
+  m_Mass: 0.61218774
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 3
@@ -329,7 +332,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.26275, y: 1.625885}
+  m_Size: {x: 2.4093165, y: 1.625885}
   m_EdgeRadius: 0
 --- !u!58 &2796359145819374813
 CircleCollider2D:
@@ -379,6 +382,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04556835, y: 3.7156239}
+  m_Offset: {x: -0.045568384, y: 3.5565817}
   serializedVersion: 2
-  m_Radius: 1.1443613
+  m_Radius: 1.2546953

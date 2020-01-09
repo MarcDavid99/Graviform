@@ -46,12 +46,14 @@ public class PlayerRotation : MonoBehaviour
             {
                 RotateTime = Time.time + _rotateTimeFrequency;
                 Events.ChangeGravity(1);
+                Events.ChangeDrone(1);
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 RotateTime = Time.time + _rotateTimeFrequency;
                 Events.ChangeGravity(-1);
+                Events.ChangeDrone(-1);
             }
         }
     }

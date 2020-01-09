@@ -43,6 +43,10 @@ public class CameraRotation : MonoBehaviour
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(target), speed * Time.deltaTime);
         }
+        if (transform.rotation == Quaternion.Euler(target))
+        {
+            isPressed = false;
+        }
 
     }
 
@@ -65,7 +69,7 @@ public class CameraRotation : MonoBehaviour
         {
             target = new Vector3(0, 0, -90);
         }
-        RotateSound.Play();
+        //RotateSound.Play();
         isPressed = true;
     }
 
