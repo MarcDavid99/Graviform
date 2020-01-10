@@ -66,4 +66,10 @@ public class PauseMenu : MonoBehaviour
         Events.Respawn();
         //SceneManager.LoadScene(1);
     }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 }

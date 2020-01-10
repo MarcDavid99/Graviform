@@ -211,6 +211,7 @@ public class PlayerController2D : MonoBehaviour
             Debug.Log("Spawn");
             Events.Respawn();
         }
+       
     }
 
     private void Respawn()
