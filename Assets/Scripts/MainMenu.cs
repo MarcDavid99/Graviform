@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject LevelMenu;
-    public void PlayGame()
+
+    public void PlayGame(int level)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(level + 1);
     }
 
     public void QuitGame()
