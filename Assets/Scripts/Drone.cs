@@ -16,13 +16,6 @@ public class Drone : MonoBehaviour
    
     void Start()
     {
-        if (_directions[Direction] < 0)
-        {
-            _multiplier = -1;
-        } else
-        {
-            _multiplier = 1;
-        }
         Events.OnChangeDrone += SwitchAxis;
         _rigidbody = GetComponent<Rigidbody2D>();
         Move();
@@ -33,7 +26,13 @@ public class Drone : MonoBehaviour
         Raycasting();
         if (_collision)
         {
-            _multiplier *= -1;
+            if (Direction < 2)
+            {
+                Direction += 2;
+            } else
+            {
+                Direction -= 2;
+            }
             Move();
             _collision = false;
         }
@@ -57,13 +56,17 @@ public class Drone : MonoBehaviour
     {
         switch (_directions[Direction])
         {
-            case -1:
             case 1:
-                _rigidbody.velocity = new Vector2(_multiplier * MovingSpeed, GetComponent<Rigidbody2D>().velocity.y);
+                _rigidbody.velocity = new Vector2(MovingSpeed, 0);
+                break;
+            case -1:
+                _rigidbody.velocity = new Vector2(-MovingSpeed, 0);
                 break;
             case 2:
+                _rigidbody.velocity = new Vector2(0, MovingSpeed);
+                break;
             case -2:
-                _rigidbody.velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, _multiplier * MovingSpeed);
+                _rigidbody.velocity = new Vector2(0, -MovingSpeed);
                 break;
         }
     }
@@ -73,20 +76,16 @@ public class Drone : MonoBehaviour
         switch (_directions[Direction])
         {
             case -1:
-            case 1:
                 _collision = Physics2D.Linecast(this.transform.position, SightLeft.position, 1 << LayerMask.NameToLayer("Ground"));
-                if (!_collision)
-                {
-                    _collision = Physics2D.Linecast(this.transform.position, SightRight.position, 1 << LayerMask.NameToLayer("Ground"));
-                }
+                break;
+            case 1:
+                _collision = Physics2D.Linecast(this.transform.position, SightRight.position, 1 << LayerMask.NameToLayer("Ground"));
                 break;
             case 2:
-            case -2:
                 _collision = Physics2D.Linecast(this.transform.position, SightUp.position, 1 << LayerMask.NameToLayer("Ground"));
-                if (!_collision)
-                {
-                    _collision = Physics2D.Linecast(this.transform.position, SightDown.position, 1 << LayerMask.NameToLayer("Ground"));
-                }
+                break;
+            case -2:
+                _collision = Physics2D.Linecast(this.transform.position, SightDown.position, 1 << LayerMask.NameToLayer("Ground"));
                 break;
         }
     }
