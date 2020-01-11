@@ -208,7 +208,6 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag.Equals("Trap"))
         {
             DeathSound.Play();
-            Debug.Log("Spawn");
             Events.Respawn();
         }
     }
