@@ -16,7 +16,7 @@ public class CameraRotation : MonoBehaviour
     private int rotateDir;
 
     public float speed = 2f;
-    // Start is called before the first frame update
+    
     public AudioClipGroup RotateSound;
 
     private void Awake()
@@ -35,7 +35,6 @@ public class CameraRotation : MonoBehaviour
         //PlayerCameras[current].MoveToTopOfPrioritySubqueue();
     }
 
-    // Update is called once per frame
     void Update()
     {
 

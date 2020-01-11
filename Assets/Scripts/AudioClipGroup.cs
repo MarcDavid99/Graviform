@@ -25,14 +25,14 @@ public class AudioClipGroup : ScriptableObject
 
     public void Play(AudioSource audioSource)
     {
-        Debug.Log("play(audiosource) enne kontrolli");
+      
         if (audioClips == null || audioClips.Count <= 0)
         {
             return;
         }
 
         //if (Time.time)
-        Debug.Log("play(audiosource)");
+        
         audioSource.clip = audioClips[Random.Range(0, audioClips.Count)];
         audioSource.volume = Random.Range(VolumeMin, VolumeMax);
         audioSource.pitch = Random.Range(PitchMin, PitchMax);

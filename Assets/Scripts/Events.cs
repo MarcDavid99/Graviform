@@ -21,6 +21,16 @@ public static class Events
     public static void SwitchCanMove() => OnSwitchCanMove?.Invoke();
 
     public static event Action OnRespawn;
-
     public static void Respawn() => OnRespawn?.Invoke();
+
+    public static event Action<float[]> OnPickUpCoin;
+    public static void ChangeCoinCounter(float[] coords) => OnPickUpCoin?.Invoke(coords);
+
+    public static event Action OnWin;
+    public static void DoSomething() => OnWin?.Invoke();
+
+    public static event Action OnResetCounter;
+    public static void ResetCoinCounter() => OnResetCounter?.Invoke();
+
+   
 }

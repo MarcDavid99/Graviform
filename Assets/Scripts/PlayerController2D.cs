@@ -208,7 +208,7 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag.Equals("Trap"))
         {
             DeathSound.Play();
-            Debug.Log("Spawn");
+            //Debug.Log("Spawn");
             Events.Respawn();
         }
        
@@ -219,6 +219,8 @@ public class PlayerController2D : MonoBehaviour
         SpawnSound.Play();
         this.gameObject.transform.position = Spawn.transform.position;
         string orientation = Events.RequestGravityDirection();
+        Events.ResetCoinCounter();
+        
         if (orientation.Equals("left"))
         {
             Events.ChangeGravity(-1);
@@ -232,5 +234,6 @@ public class PlayerController2D : MonoBehaviour
             Events.ChangeGravity(1);
             Events.ChangeGravity(1);
         }
+        
     }
 }
