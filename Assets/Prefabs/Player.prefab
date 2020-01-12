@@ -234,6 +234,10 @@ MonoBehaviour:
   m_CeilingCheck: {fileID: 2796359144858347248}
   m_CrouchDisableCollider: {fileID: 0}
   m_Grounded: 0
+  DeathSound: {fileID: 11400000, guid: 9132bab4980b75648930e5593cc12362, type: 2}
+  JumpSound: {fileID: 11400000, guid: 6c9c510321ccd58459fa7314eaf210bc, type: 2}
+  SpawnSound: {fileID: 11400000, guid: d54ac383d7e367b49aa77c551bcb3202, type: 2}
+  CheckpointSound: {fileID: 11400000, guid: 77df4108c8e3d8447aa28b0a3acf2cff, type: 2}
   OnLandEvent:
     m_PersistentCalls:
       m_Calls:
@@ -267,6 +271,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dade70d66bdcdf048b9d3d5144100296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LeftCheck: {fileID: 0}
+  RightCheck: {fileID: 0}
+  MiddleCheck: {fileID: 0}
   axisDirection: 0
   moveDirection: 0
 --- !u!114 &2796359145819374815

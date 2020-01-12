@@ -9,6 +9,7 @@ TagManager:
   - Crate
   - Bullet
   - Tutorial
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

@@ -19,9 +19,18 @@ public class AudioClipGroup : ScriptableObject
     public float Cooldown = 0.1f;
     public List<AudioClip> audioClips;
 
+    public float minVolumeFromOptions;
+    public float maxVolumeFromOptions;
+
     private float timestamp;
     private AudioSourcePool audioSourcePool;
 
+    public void Awake()
+    {
+        minVolumeFromOptions = VolumeMin;
+        maxVolumeFromOptions = VolumeMax;
+
+    }
 
     public void Play(AudioSource audioSource)
     {
@@ -48,6 +57,18 @@ public class AudioClipGroup : ScriptableObject
             audioSourcePool = FindObjectOfType<AudioSourcePool>();
         }
         Play(audioSourcePool.getSource());
+    }
+
+    public void Mute()
+    {
+        VolumeMax = 0;
+        VolumeMin = 0;
+    }
+
+    public void UnMute()
+    {
+        VolumeMax = maxVolumeFromOptions;
+        VolumeMin = minVolumeFromOptions;
     }
 
 }
