@@ -17,8 +17,8 @@ public static class Events
     public static event Func<bool> OnRequestAllowRotation;
     public static bool RequestAllowRotation() => OnRequestAllowRotation?.Invoke() ?? true;
 
-    public static event Action OnSwitchCanMove;
-    public static void SwitchCanMove() => OnSwitchCanMove?.Invoke();
+    public static event Func<bool> OnFacingRight;
+    public static bool FacingRight() => OnFacingRight?.Invoke() ?? true;
 
     public static event Action OnRespawn;
     public static void Respawn() => OnRespawn?.Invoke();
@@ -32,5 +32,8 @@ public static class Events
     public static event Action OnResetCounter;
     public static void ResetCoinCounter() => OnResetCounter?.Invoke();
 
-   
+    public static event Action<int> OnChangeDrone;
+    public static void ChangeDrone(int direction) => OnChangeDrone?.Invoke(direction);
+
+
 }

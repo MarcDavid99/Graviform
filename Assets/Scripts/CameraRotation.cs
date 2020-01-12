@@ -64,7 +64,7 @@ public class CameraRotation : MonoBehaviour
         {
             target = new Vector3(0, 0, -90);
         }
-        RotateSound.Play();
+        //RotateSound.Play();
         isPressed = true;
     }
 

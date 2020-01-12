@@ -46,22 +46,38 @@ public class PlayerRotation : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                _collision = Physics2D.Linecast(MiddleCheck.position, LeftCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                if (Events.FacingRight())
+                {
+                    _collision = Physics2D.Linecast(MiddleCheck.position, LeftCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                }
+                else
+                {
+                    _collision = Physics2D.Linecast(MiddleCheck.position, RightCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                }
                 if (!_collision)
                 {
                     RotateTime = Time.time + _rotateTimeFrequency;
                     Events.ChangeGravity(1);
+                    Events.ChangeDrone(1);
                     _collision = false;
                 }
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                _collision = Physics2D.Linecast(MiddleCheck.position, RightCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                if (Events.FacingRight())
+                {
+                    _collision = Physics2D.Linecast(MiddleCheck.position, RightCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                }
+                else
+                {
+                    _collision = Physics2D.Linecast(MiddleCheck.position, LeftCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+                }
                 if (!_collision)
                 {
                     RotateTime = Time.time + _rotateTimeFrequency;
                     Events.ChangeGravity(-1);
+                    Events.ChangeDrone(-1);
                     _collision = false;
                 }
             }

@@ -50,6 +50,7 @@ public class PlayerController2D : MonoBehaviour
     {
 
         Events.OnRespawn += Respawn;
+        Events.OnFacingRight += GetFacingRight;
 
         Spawn = GameObject.FindWithTag("Respawn");
 
@@ -67,6 +68,7 @@ public class PlayerController2D : MonoBehaviour
     private void OnDestroy()
     {
         Events.OnRespawn -= Respawn;
+        Events.OnFacingRight -= GetFacingRight;
     }
 
     private void FixedUpdate()
@@ -235,5 +237,10 @@ public class PlayerController2D : MonoBehaviour
             Events.ChangeGravity(1);
         }
         
+    }
+
+    private bool GetFacingRight()
+    {
+        return m_FacingRight;
     }
 }
