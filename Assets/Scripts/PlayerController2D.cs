@@ -29,10 +29,12 @@ public class PlayerController2D : MonoBehaviour
     private bool isRotating = false;
     private float rotation;
 
-    private Vector3 checkPoint;
+    private GameObject checkPoint;
     private float checkPointRotation;
     private GameObject Spawn;
     private Collider2D currentCheckpoint;
+    private Color green = new Color(0, 255f, 0, 255f);
+    private Color red = new Color(255f, 255f, 255f, 255f);
 
     [Header("Events")]
     [Space]
@@ -55,9 +57,9 @@ public class PlayerController2D : MonoBehaviour
         Events.OnRespawn += Respawn;
         Events.OnFacingRight += GetFacingRight;
         Events.OnWin += onWin;
-       
+
         Spawn = GameObject.FindWithTag("Respawn");
-        checkPoint = Spawn.gameObject.transform.position;
+        checkPoint = Spawn;
         checkPointRotation = Spawn.gameObject.transform.eulerAngles.z;
         currentCheckpoint = null;
 
@@ -221,48 +223,57 @@ public class PlayerController2D : MonoBehaviour
             //Debug.Log("Spawn");
             Events.Respawn();
         }
-        
-       
+
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision){
-        
-        if (collision.gameObject.tag.Equals("Checkpoint")){
-                //The following should make it so that the checkpoint sound is played only once per checkpoint, so you cant walk back and forth and spam sounds.
-                //Not working atm
-                /*if (currentCheckpoint == null){
-                    Debug.Log("First time touchin");
-                    currentCheckpoint = collision;
-                }else{
-                    if (collision.name.Equals(currentCheckpoint.name)){
-                        Debug.Log("Is same checkpoint");
-                        CheckpointSound.Mute();
-                    }else{
-                        Debug.Log("Is different checkpoint");
-                        CheckpointSound.UnMute();
-                        currentCheckpoint = collision;
-                    }
-                }*/
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
-                Debug.Log("Is CP" + CheckpointSound.VolumeMin);
-                CheckpointSound.Play();
-                
-                checkPoint = collision.gameObject.transform.position;
-                checkPointRotation = collision.gameObject.transform.eulerAngles.z;
-            }
+        if (collision.gameObject.tag.Equals("Checkpoint") && checkPoint.transform.position != collision.gameObject.transform.position)
+        {
+            //The following should make it so that the checkpoint sound is played only once per checkpoint, so you cant walk back and forth and spam sounds.
+            //Not working atm
+            /*if (currentCheckpoint == null){
+                Debug.Log("First time touchin");
+                currentCheckpoint = collision;
+            }else{
+                if (collision.name.Equals(currentCheckpoint.name)){
+                    Debug.Log("Is same checkpoint");
+                    CheckpointSound.Mute();
+                }else{
+                    Debug.Log("Is different checkpoint");
+                    CheckpointSound.UnMute();
+                    currentCheckpoint = collision;
+                }
+            }*/
+
+            checkPoint.GetComponent<SpriteRenderer>().color = red;
+
+            Debug.Log("Is CP" + CheckpointSound.VolumeMin);
+            CheckpointSound.Play();
+
+            checkPoint = collision.gameObject;
+            checkPointRotation = collision.gameObject.transform.eulerAngles.z;
+            checkPoint.GetComponent<SpriteRenderer>().color = green;
+        }
     }
 
     //When game is won, reset "checkpoint" to spawn.
-    private void onWin(){
-        checkPoint = Spawn.gameObject.transform.position;
+    private void onWin()
+    {
+        checkPoint.GetComponent<SpriteRenderer>().color = red;
+        checkPoint = Spawn;
         checkPointRotation = Spawn.gameObject.transform.eulerAngles.z;
 
     }
 
-    private int[] arrangeGravityChangeValues(float checkPointRotation){
+    private int[] arrangeGravityChangeValues(float checkPointRotation)
+    {
         int[] toReturn = new int[4];
 
-        if (checkPointRotation == 0 || checkPointRotation == 180){
+        if (checkPointRotation == 0 || checkPointRotation == 180)
+        {
 
             toReturn[0] = 2;
             toReturn[1] = -1;
@@ -270,16 +281,18 @@ public class PlayerController2D : MonoBehaviour
             toReturn[3] = 1;
 
             //Opposite if opposite rotation
-            if (checkPointRotation == 180){
+            if (checkPointRotation == 180)
+            {
                 toReturn[2] = 2;
                 toReturn[3] = -1;
                 toReturn[0] = 0;
                 toReturn[1] = 1;
-                
+
             }
 
         }
-        if (checkPointRotation == 90 || checkPointRotation == 270){
+        if (checkPointRotation == 90 || checkPointRotation == 270)
+        {
             Debug.Log("rotation is 90 or 270");
             //TODO FIX
             toReturn[0] = -1;
@@ -288,12 +301,13 @@ public class PlayerController2D : MonoBehaviour
             toReturn[3] = 2;
 
             //Opposite if opposite rotation
-            if (checkPointRotation == 270){
+            if (checkPointRotation == 270)
+            {
                 toReturn[2] = -1;
                 toReturn[3] = 0;
                 toReturn[0] = 1;
                 toReturn[1] = 2;
-                
+
             }
 
         }
@@ -306,63 +320,79 @@ public class PlayerController2D : MonoBehaviour
     {
         this.GetComponent<ParticleSystem>().Play();
         SpawnSound.Play();
-        this.gameObject.transform.position = checkPoint;
+        this.gameObject.transform.position = checkPoint.transform.position;
         string orientation = Events.RequestGravityDirection();
         int[] listOfGravityChangeValues = arrangeGravityChangeValues(checkPointRotation);
 
-        
+
 
 
         Events.ResetCoinCounter();
-        
+
         Debug.Log("Orientation: " + orientation + "    checkpointrotation: " + checkPointRotation);
 
-        if(orientation.Equals("up")){
+        if (orientation.Equals("up"))
+        {
             int gravityValue = listOfGravityChangeValues[0];
-            if (gravityValue == 2){
+            if (gravityValue == 2)
+            {
                 Events.ChangeGravity(1);
                 Events.ChangeGravity(1);
-            }else if (gravityValue != 0){
+            }
+            else if (gravityValue != 0)
+            {
                 Events.ChangeGravity(gravityValue);
             }
 
 
         }
-        if(orientation.Equals("left")){
+        if (orientation.Equals("left"))
+        {
             int gravityValue = listOfGravityChangeValues[1];
-            if (gravityValue == 2){
+            if (gravityValue == 2)
+            {
                 Events.ChangeGravity(1);
                 Events.ChangeGravity(1);
-            }else if (gravityValue != 0){
+            }
+            else if (gravityValue != 0)
+            {
                 Events.ChangeGravity(gravityValue);
             }
 
 
         }
-        if(orientation.Equals("down")){
+        if (orientation.Equals("down"))
+        {
             int gravityValue = listOfGravityChangeValues[2];
-            if (gravityValue == 2){
+            if (gravityValue == 2)
+            {
                 Events.ChangeGravity(1);
                 Events.ChangeGravity(1);
-            }else if (gravityValue != 0){
+            }
+            else if (gravityValue != 0)
+            {
                 Events.ChangeGravity(gravityValue);
             }
 
 
         }
-        if(orientation.Equals("right")){
+        if (orientation.Equals("right"))
+        {
             int gravityValue = listOfGravityChangeValues[3];
-            if (gravityValue == 2){
+            if (gravityValue == 2)
+            {
                 Events.ChangeGravity(1);
                 Events.ChangeGravity(1);
-            }else if (gravityValue != 0){
+            }
+            else if (gravityValue != 0)
+            {
                 Events.ChangeGravity(gravityValue);
             }
 
 
         }
-        
-        
+
+
     }
 
     private bool GetFacingRight()

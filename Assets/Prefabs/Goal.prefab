@@ -94,7 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3736f0dcb1f5554b99af91031ddbae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  WinSound: {fileID: 11400000, guid: 096eb48048cfdcc44abc0d710fb9d1a3, type: 2}
 --- !u!61 &8253632192665602828
 BoxCollider2D:
   m_ObjectHideFlags: 0

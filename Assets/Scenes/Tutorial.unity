@@ -11328,9 +11328,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: ': 0
-
-'
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7755b4ce3dbfed548ae2eb903a0bbd6d, type: 2}
   m_sharedMaterial: {fileID: 2901056683434040443, guid: 7755b4ce3dbfed548ae2eb903a0bbd6d,
@@ -11400,9 +11398,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 8.583069, z: -19.579407, w: 0}
   m_textInfo:
     textComponent: {fileID: 778861185}
-    characterCount: 4
+    characterCount: 1
     spriteCount: 0
-    spaceCount: 2
+    spaceCount: 0
     wordCount: 1
     linkCount: 0
     lineCount: 1
@@ -15129,11 +15127,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 412975656002172224, guid: 0a6bebf968442d844a479d1c140326fd,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.35314998
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a6bebf968442d844a479d1c140326fd, type: 3}
 --- !u!1001 &2629171022552482144
@@ -15340,24 +15333,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8253632192665602829, guid: cba59975e82b6494ab80fd8188218dd5,
         type: 3}
-      propertyPath: score
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8253632192665602829, guid: cba59975e82b6494ab80fd8188218dd5,
-        type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 1873735308}
-    - target: {fileID: 8253632192665602829, guid: cba59975e82b6494ab80fd8188218dd5,
-        type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 76183670}
-    - target: {fileID: 8253632192665602829, guid: cba59975e82b6494ab80fd8188218dd5,
-        type: 3}
-      propertyPath: WinSound
-      value: 
-      objectReference: {fileID: 11400000, guid: 096eb48048cfdcc44abc0d710fb9d1a3,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cba59975e82b6494ab80fd8188218dd5, type: 3}
