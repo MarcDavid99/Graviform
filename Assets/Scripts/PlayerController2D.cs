@@ -304,6 +304,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void Respawn()
     {
+        this.GetComponent<ParticleSystem>().Play();
         SpawnSound.Play();
         this.gameObject.transform.position = checkPoint;
         string orientation = Events.RequestGravityDirection();
