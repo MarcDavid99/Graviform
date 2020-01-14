@@ -35,5 +35,14 @@ public static class Events
     public static event Action<int> OnChangeDrone;
     public static void ChangeDrone(int direction) => OnChangeDrone?.Invoke(direction);
 
+    public static event Action OnCheckpointReached;
+    public static void saveCoinsState() => OnCheckpointReached?.Invoke();
+
+    public static event Action OnTotalRestart;
+    public static void totalRestart() => OnTotalRestart?.Invoke();
+
+    public static event Func<bool> OnRequestTotalRestartBool;
+    public static bool getTotalRestartBool() => OnRequestTotalRestartBool.Invoke();
+
 
 }

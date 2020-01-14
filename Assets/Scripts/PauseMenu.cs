@@ -10,6 +10,17 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private bool isPaused;
     [SerializeField] public bool hasWon;
+    public bool totalRestart;
+
+    public void Awake(){
+        totalRestart = false;
+        Events.OnRequestTotalRestartBool += getRestartBool;
+    }
+
+    public void OnDestroy(){
+        Events.OnRequestTotalRestartBool -= getRestartBool;
+    }
+    
 
     private void Update()
     {
@@ -62,14 +73,20 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         hasWon = false;
+        totalRestart = true;
         winMenuUI.SetActive(false);
         Events.Respawn();
+        totalRestart = false;
         //SceneManager.LoadScene(1);
     }
 
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public bool getRestartBool(){
+        return totalRestart;
     }
 
 }

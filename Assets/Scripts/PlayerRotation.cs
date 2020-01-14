@@ -20,6 +20,7 @@ public class PlayerRotation : MonoBehaviour
     //If axisDirection = 0, then when moving change x coordinates, otherwise y coordinates (if flipped to the side)s
     public int axisDirection = 0;
     public int moveDirection;
+    public AudioClipGroup RotationSound;
 
     private void Awake()
     {
@@ -60,7 +61,9 @@ public class PlayerRotation : MonoBehaviour
                     Events.ChangeGravity(1);
                     Events.ChangeDrone(1);
                     _collision = false;
+                    RotationSound.Play();
                 }
+                
             }
 
             if (Input.GetKeyDown(KeyCode.Q))
@@ -79,7 +82,9 @@ public class PlayerRotation : MonoBehaviour
                     Events.ChangeGravity(-1);
                     Events.ChangeDrone(-1);
                     _collision = false;
+                    RotationSound.Play();
                 }
+                
             }
         }
     }

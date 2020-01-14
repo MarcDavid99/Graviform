@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1768408485867510168}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,4 +131,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinSound: {fileID: 11400000, guid: 4c8e8947e80fe604ab2191cd9e8b383b, type: 2}
-  controller: {fileID: 0}

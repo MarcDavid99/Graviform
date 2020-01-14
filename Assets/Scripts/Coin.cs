@@ -21,24 +21,23 @@ public class Coin : MonoBehaviour
         coords[3] = this.transform.eulerAngles.z;
     }
 
-    private void OnDestroy()
-    {
-        Debug.Log("Got here");
-        
-    }
+    
+    
 
 
     
 
     void OnTriggerEnter2D(Collider2D col){
-
+        
+        if (col.gameObject.tag.Equals("ForCoin"))
+        {
+            coinSound.Play();
+            Destroy(this.gameObject);
+            Events.ChangeCoinCounter(coords);
+        }
         
         
         
-        coinSound.Play();
-        
-        Destroy(this.gameObject);
-        Events.ChangeCoinCounter(coords);
     }
 
 }

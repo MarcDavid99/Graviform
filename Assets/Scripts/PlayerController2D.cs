@@ -25,7 +25,7 @@ public class PlayerController2D : MonoBehaviour
     public AudioClipGroup JumpSound;
     public AudioClipGroup SpawnSound;
     public AudioClipGroup CheckpointSound;
-
+    
     private bool isRotating = false;
     private float rotation;
 
@@ -249,13 +249,12 @@ public class PlayerController2D : MonoBehaviour
             }*/
 
             checkPoint.GetComponent<SpriteRenderer>().color = red;
-
-            Debug.Log("Is CP" + CheckpointSound.VolumeMin);
             CheckpointSound.Play();
 
             checkPoint = collision.gameObject;
             checkPointRotation = collision.gameObject.transform.eulerAngles.z;
             checkPoint.GetComponent<SpriteRenderer>().color = green;
+            Events.saveCoinsState();
         }
     }
 
@@ -325,9 +324,13 @@ public class PlayerController2D : MonoBehaviour
         int[] listOfGravityChangeValues = arrangeGravityChangeValues(checkPointRotation);
 
 
+        if (Events.getTotalRestartBool()){
+            Events.totalRestart();
+        }else{
+            Events.ResetCoinCounter();
+        }
 
-
-        Events.ResetCoinCounter();
+        
 
         Debug.Log("Orientation: " + orientation + "    checkpointrotation: " + checkPointRotation);
 

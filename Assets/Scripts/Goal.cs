@@ -33,6 +33,7 @@ public class Goal : MonoBehaviour
         //update_score();
         WinSound.Play();
         pauseMenu.hasWon = true;
+        pauseMenu.totalRestart = true;
         Events.DoSomething();
         //collision.gameObject.transform.position = Spawn.transform.position;
     }
