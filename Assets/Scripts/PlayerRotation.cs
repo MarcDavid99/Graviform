@@ -14,7 +14,7 @@ public class PlayerRotation : MonoBehaviour
     private int direction = 0;
     private string[] directions = { "down", "left", "up", "right" };
     private float RotateTime = 0;
-    private float _rotateTimeFrequency = 0.3f;
+    private float _rotateTimeFrequency = 0.2f;
     private bool _collision;
 
     //If axisDirection = 0, then when moving change x coordinates, otherwise y coordinates (if flipped to the side)s

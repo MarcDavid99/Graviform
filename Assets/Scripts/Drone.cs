@@ -23,6 +23,11 @@ public class Drone : MonoBehaviour
         Move();
     }
 
+    private void OnDestroy()
+    {
+        Events.OnChangeDrone -= SwitchAxis;
+    }
+
     private void Update()
     {
         Raycasting();
