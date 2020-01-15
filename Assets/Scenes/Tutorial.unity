@@ -277,7 +277,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 289, y: -135}
+  m_AnchoredPosition: {x: 216, y: -138}
   m_SizeDelta: {x: 232.1, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &73178974
@@ -1224,7 +1224,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 16aa3420d9986ff47bab305f6f210e84, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -12263,7 +12263,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 288, y: 14}
+  m_AnchoredPosition: {x: 216, y: 0}
   m_SizeDelta: {x: 232.1, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &889194627
@@ -12520,11 +12520,6 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
-    - target: {fileID: 2629171021797483487, guid: 0887d3c8b81099548ba5462a07548d67,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.29
-      objectReference: {fileID: 0}
     - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -12539,6 +12534,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 45.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629171021797483487, guid: 0887d3c8b81099548ba5462a07548d67,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.29
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0887d3c8b81099548ba5462a07548d67, type: 3}
@@ -12584,7 +12584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -267, y: -138}
+  m_AnchoredPosition: {x: -216.99997, y: -138}
   m_SizeDelta: {x: 232.1, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1029393289
@@ -14598,11 +14598,6 @@ PrefabInstance:
       propertyPath: m_firstOverflowCharacterIndex
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 2629171021797483487, guid: 0887d3c8b81099548ba5462a07548d67,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.31
-      objectReference: {fileID: 0}
     - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -14622,6 +14617,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 161.096
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629171021797483487, guid: 0887d3c8b81099548ba5462a07548d67,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0887d3c8b81099548ba5462a07548d67, type: 3}
@@ -14744,11 +14744,6 @@ PrefabInstance:
       propertyPath: m_textAlignment
       value: 514
       objectReference: {fileID: 0}
-    - target: {fileID: 2629171021797483487, guid: 0887d3c8b81099548ba5462a07548d67,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -14758,6 +14753,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 45.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629171021797483487, guid: 0887d3c8b81099548ba5462a07548d67,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 2629171020637767693, guid: 0887d3c8b81099548ba5462a07548d67,
         type: 3}
@@ -15332,7 +15332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -266, y: 12}
+  m_AnchoredPosition: {x: -217, y: 0}
   m_SizeDelta: {x: 232.1, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2110864678
@@ -15446,7 +15446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2130915450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15688,6 +15688,21 @@ PrefabInstance:
       propertyPath: m_firstOverflowCharacterIndex
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.432
+      objectReference: {fileID: 0}
+    - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 47.907
+      objectReference: {fileID: 0}
     - target: {fileID: 2629171021797483487, guid: 0887d3c8b81099548ba5462a07548d67,
         type: 3}
       propertyPath: m_Material
@@ -15707,21 +15722,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.432
-      objectReference: {fileID: 0}
-    - target: {fileID: 2629171020637767694, guid: 0887d3c8b81099548ba5462a07548d67,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 47.907
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0887d3c8b81099548ba5462a07548d67, type: 3}
