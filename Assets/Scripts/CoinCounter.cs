@@ -30,7 +30,7 @@ public class CoinCounter : MonoBehaviour
         coins = GameObject.FindGameObjectsWithTag("Coin");
 
       
-
+        levelCoins = coins.Length;
         for (int i = 0; i < coins.Length; i++)
         {
             List<float> subList = new List<float>();

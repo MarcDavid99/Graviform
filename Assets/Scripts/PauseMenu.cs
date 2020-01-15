@@ -72,6 +72,9 @@ public class PauseMenu : MonoBehaviour
     }
     public void Restart()
     {
+
+        isPaused = false;
+        Debug.Log("Is it here");
         hasWon = false;
         totalRestart = true;
         winMenuUI.SetActive(false);

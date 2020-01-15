@@ -319,16 +319,21 @@ public class PlayerController2D : MonoBehaviour
     {
         this.GetComponent<ParticleSystem>().Play();
         SpawnSound.Play();
+        if (Events.getTotalRestartBool()){
+            Events.totalRestart();
+            Debug.Log("oiuzadfgaiu");
+            checkPoint = Spawn;
+            checkPointRotation = Spawn.gameObject.transform.eulerAngles.z;
+        }else{
+            Events.ResetCoinCounter();
+            
+        }
         this.gameObject.transform.position = checkPoint.transform.position;
         string orientation = Events.RequestGravityDirection();
         int[] listOfGravityChangeValues = arrangeGravityChangeValues(checkPointRotation);
 
 
-        if (Events.getTotalRestartBool()){
-            Events.totalRestart();
-        }else{
-            Events.ResetCoinCounter();
-        }
+        
 
         
 
