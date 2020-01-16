@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] public bool hasWon;
     public bool totalRestart;
 
+    public AudioClipGroup ClickSound;
+
     public void Awake(){
         totalRestart = false;
         Events.OnRequestTotalRestartBool += getRestartBool;
@@ -90,6 +92,10 @@ public class PauseMenu : MonoBehaviour
 
     public bool getRestartBool(){
         return totalRestart;
+    }
+    public void Play()
+    {
+        ClickSound.Play();
     }
 
 }

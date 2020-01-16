@@ -15,5 +15,4 @@ public class WinMenu : MonoBehaviour
         Application.Quit();
     }
 
-
 }

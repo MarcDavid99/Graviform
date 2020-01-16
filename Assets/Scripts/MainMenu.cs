@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
-    public GameObject LevelMenu;
+    [SerializeField] private GameObject MainMenuu;
+    [SerializeField] private GameObject LevelMenu;
+    public AudioClipGroup ClickSound;
 
     public void PlayGame(int level)
     {
@@ -19,8 +21,19 @@ public class MainMenu : MonoBehaviour
 
     public void SelectLevel()
     {
-        this.gameObject.SetActive(false);
+        MainMenuu.gameObject.SetActive(false);
         LevelMenu.gameObject.SetActive(true);
     }
 
+    public void PlaySound()
+    {
+        Debug.Log("CLiekd");
+        ClickSound.Play();
+    }
+
+    public void Back()
+    {
+        LevelMenu.gameObject.SetActive(false);
+        MainMenuu.gameObject.SetActive(true);
+    }
 }
